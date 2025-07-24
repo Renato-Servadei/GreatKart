@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from store.models import Product
 
 def store(request):
-    return render(request, 'store/store.html')
+    products = Product.objects.all().filter(is_available = True)
+    
+    return render(request, 'store/store.html', context = {
+        'products' : products
+    })
